@@ -1,0 +1,28 @@
+{# Custom template for the Social Icons menu #}
+{% import _self as menus %}
+
+{{ menus.menu_links(items, attributes, 0) }}
+
+{% macro menu_links(items, attributes, delta) %}
+  {% import _self as menus %}
+  {% if items %}
+    <ul class="social-links">
+    {% for item in items %}
+      <li{{ item.attributes }}>
+        <a href="{{ item.url }}">
+          {# The instructor uses FontAwesome classes injected dynamically or hardcoded #}
+          {% if 'facebook' in item.url|render|lower %}
+            <i class="fab fa-facebook"></i>
+          {% elseif 'twitter' in item.url|render|lower or 'x.com' in item.url|render|lower %}
+            <i class="fab fa-twitter"></i>
+          {% elseif 'linkedin' in item.url|render|lower %}
+            <i class="fab fa-linkedin"></i>
+          {% else %}
+            {{ item.title }}
+          {% endif %}
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}

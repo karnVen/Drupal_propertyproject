@@ -1,0 +1,22 @@
+global-styling:
+  version: VERSION
+  css:
+    theme:
+      vendor/bootstrap/css/bootstrap.min.css: {}
+      assets/css/fontawesome.css: {}
+      assets/css/templatemo-villa-agency.css: {}
+      assets/css/owl.css: {}
+      assets/css/animate.css: {}
+      https://unpkg.com/swiper@7/swiper-bundle.min.css: { type: external }
+
+global-scripts:
+  version: VERSION
+  js:
+    vendor/jquery/jquery.min.js: {}
+    vendor/bootstrap/js/bootstrap.min.js: {}
+    assets/js/isotope.min.js: {}
+    assets/js/owl-carousel.js: {}
+    assets/js/counter.js: {}
+    assets/js/custom.js: {}
+  dependencies:
+    - core/jquery

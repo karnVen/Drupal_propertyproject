@@ -1,0 +1,60 @@
+{% if page.messages %}
+  <div class="system-messages-wrapper container mt-3">
+    {{ page.messages }}
+  </div>
+{% endif %}
+
+{% if page.sub_header %}
+  <div class="sub-header">
+    {{ page.sub_header }}
+  </div>
+{% endif %}
+
+{% if page.header_sticky %}
+  <header class="header-area header-sticky">
+    {{ page.header_sticky }}
+  </header>
+{% endif %}
+
+{% if page.main_banner %}
+  <div class="main-banner">
+    {{ page.main_banner }}
+  </div>
+{% endif %}
+
+{% if page.featured_section %}
+  <div class="featured section">
+    {{ page.featured_section }}
+  </div>
+{% endif %}
+
+{% if page.video_section %}
+  <div class="video section">
+    {{ page.video_section }}
+  </div>
+{% endif %}
+
+{% if page.best_deal %}
+  <div class="section best-deal">
+    {{ page.best_deal }}
+  </div>
+{% endif %}
+
+{% if page.contact_section %}
+  <div class="contact section">
+    {{ page.contact_section }}
+  </div>
+{% endif %}
+
+<main role="main">
+  <a id="main-content" tabindex="-1"></a>
+  <div class="container layout-content">
+    {{ page.content }}
+  </div>
+</main>
+
+{% if page.footer %}
+  <footer>
+    {{ page.footer }}
+  </footer>
+{% endif %}

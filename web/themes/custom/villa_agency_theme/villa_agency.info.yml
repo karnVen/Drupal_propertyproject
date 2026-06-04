@@ -1,0 +1,16 @@
+name: Villa Agency
+type: theme
+description: 'A custom theme converted from Villa Agency HTML template.'
+package: Custom
+core_version_requirement: ^9 || ^10 || ^11
+base theme: stable9
+
+libraries:
+  - villa_agency/global-styling
+  - villa_agency/global-scripts
+
+regions:
+  header: 'Header'
+  primary_menu: 'Primary menu'
+  content: 'Content'
+  footer: 'Footer'
