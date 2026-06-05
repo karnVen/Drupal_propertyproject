@@ -2,28 +2,19 @@ name: VillaAgency
 type: theme
 base theme: stark
 description: A flexible theme with a responsive, mobile-first layout.
-package: yes
+package: Custom
 core_version_requirement: ^10 || ^11
 libraries:
-  - villaagency/global
+  - villaagency/global-styling
 regions:
-  subheader: 'Sub Header'
-  header: 'Header'
+  sub_header: 'Sub Header'
+  header_sticky: 'Sticky Header'
   main_banner: 'Main Banner'
   featured_section: 'Featured Section'
-  video_secton: 'Video Section'
+  video_section: 'Video Section'
   video_content: 'Video Content'
   fun_facts: 'Fun Facts'
   best_deal: 'Best Deal'
   property_section: 'Property Section'
-  
-  # primary_menu: 'Primary menu'
-  # secondary_menu: 'Secondary menu'
-  # page_top: 'Page top'
-  # page_bottom: 'Page bottom'
-  # featured: 'Featured'
-  # breadcrumb: 'Breadcrumb'
   content: 'Content'
-  # sidebar_first: 'Sidebar first'
-  # sidebar_second: 'Sidebar second'
   footer: 'Footer'
