@@ -3,6 +3,25 @@
  * Copyright 2013-2018 David Deutsch
  * Licensed under: SEE LICENSE IN https://github.com/OwlCarousel2/OwlCarousel2/blob/master/LICENSE
  */
+
+// --- START DRUPAL 10 JQUERY POLYFILLS ---
+if (typeof jQuery !== 'undefined') {
+    jQuery.camelCase = jQuery.camelCase || function(string) {
+        return string.replace(/-([a-z])/ig, function(all, letter) { return letter.toUpperCase(); });
+    };
+    jQuery.type = jQuery.type || function(obj) {
+        if (obj == null) { return obj + ""; }
+        return typeof obj === "object" || typeof obj === "function" ?
+            Object.prototype.toString.call(obj).match(/\s([a-z|A-Z]+)/)[1].toLowerCase() : typeof obj;
+    };
+    jQuery.isFunction = jQuery.isFunction || function(obj) {
+        return typeof obj === "function";
+    };
+    jQuery.isNumeric = jQuery.isNumeric || function(value) {
+        return !isNaN(parseFloat(value)) && isFinite(value);
+    };
+}
+// --- END POLYFILLS ---
 /**
  * Owl carousel
  * @version 2.3.4
@@ -10,7 +29,7 @@
  * @author David Deutsch
  * @license The MIT License (MIT)
  * @todo Lazy Load Icon
- * @todo prevent animationend bubling
+ * @tvent animationend bubling
  * @todo itemsScaleUp
  * @todo Test Zepto
  * @todo stagePadding calculate wrong active classes
@@ -1539,44 +1558,43 @@
 	};
 
 	/**
-	 * Triggers a public event.
-	 * @todo Remove `status`, `relatedTarget` should be used instead.
-	 * @protected
-	 * @param {String} name - The event name.
-	 * @param {*} [data=null] - The event data.
-	 * @param {String} [namespace=carousel] - The event namespace.
-	 * @param {String} [state] - The state which is associated with the event.
-	 * @param {Boolean} [enter=false] - Indicates if the call enters the specified state or not.
-	 * @returns {Event} - The event arguments.
-	 */
-	Owl.prototype.trigger = function(name, data, namespace, state, enter) {
-		var status = {
-			item: { count: this._items.length, index: this.current() }
-		}, handler = $.camelCase(
-			$.grep([ 'on', name, namespace ], function(v) { return v })
-				.join('-').toLowerCase()
-		), event = $.Event(
-			[ name, 'owl', namespace || 'carousel' ].join('.').toLowerCase(),
-			$.extend({ relatedTarget: this }, status, data)
-		);
+     * Triggers a public event.
+     * @todo Remove `status`, `relatedTarget` should be used instead.
+     * @protected
+     * @param {String} name - The event name.
+     * @param {*} [data=null] - The event data.
+     * @param {String} [namespace=carousel] - The event namespace.
+     * @param {String} [state] - The state which is associated with the event.
+     * @param {Boolean} [enter=false] - Indicates if the call enters the specified state or not.
+     * @returns {Event} - The event arguments.
+     */
+    Owl.prototype.trigger = function(name, data, namespace, state, enter) {
+        var status = {
+            item: { count: this._items.length, index: this.current() }
+        }, handler = $.grep([ 'on', name, namespace ], function(v) { return v })
+                .join('-').toLowerCase().replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); }
+        ), event = $.Event(
+            [ name, 'owl', namespace || 'carousel' ].join('.').toLowerCase(),
+            $.extend({ relatedTarget: this }, status, data)
+        );
 
-		if (!this._supress[name]) {
-			$.each(this._plugins, function(name, plugin) {
-				if (plugin.onTrigger) {
-					plugin.onTrigger(event);
-				}
-			});
+        if (!this._supress[name]) {
+            $.each(this._plugins, function(name, plugin) {
+                if (plugin.onTrigger) {
+                    plugin.onTrigger(event);
+                }
+            });
 
-			this.register({ type: Owl.Type.Event, name: name });
-			this.$element.trigger(event);
+            this.register({ type: Owl.Type.Event, name: name });
+            this.$element.trigger(event);
 
-			if (this.settings && typeof this.settings[handler] === 'function') {
-				this.settings[handler].call(this, event);
-			}
-		}
+            if (this.settings && typeof this.settings[handler] === 'function') {
+                this.settings[handler].call(this, event);
+            }
+        }
 
-		return event;
-	};
+        return event;
+    };
 
 	/**
 	 * Enters a state.

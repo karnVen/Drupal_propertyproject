@@ -1,0 +1,18 @@
+<div{{ attributes }}>
+  {% set row_classes = [default_row_class ? 'views-row'] %}
+  <div class="main-banner">
+    <div class="owl-carousel owl-banner">
+
+    {% for row in rows %}
+      {# We use file_url() to convert the raw URI into a proper web path #}
+      <div class="{{ row.id }}" style="background-image: url('{{ file_url(row.url) }}');">
+        <div class="header-text">
+          <span class="category">Toronto, <em>Canada</em></span>
+          <h2>{{ row.title }}</h2>
+        </div>
+      </div>
+    {% endfor %}
+
+    </div>
+  </div>
+</div>
