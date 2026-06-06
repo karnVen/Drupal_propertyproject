@@ -1,0 +1,5 @@
+name: 'Villa Custom'
+type: module
+description: 'Provides custom Views Style Plugins for the Villa Agency theme sliders.'
+core_version_requirement: ^10 || ^11
+package: Custom
