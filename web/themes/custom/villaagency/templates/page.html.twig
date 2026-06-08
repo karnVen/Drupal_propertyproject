@@ -13,61 +13,57 @@
     </div>
   </div>
 </div>
+
 <header class="header-area header-sticky">
   <div class="container">
-      <div class="row">
-          <div class="col-12">
-              <nav class="main-nav">
-                  <a href="{{ url('<front>') }}" class="logo">
-                      <h1>Villa</h1>
-                  </a>
-                  {{ page.sticky_header }}
-                  <a class='menu-trigger'>
-                      <span>Menu</span>
-                  </a>
-                  </nav>
-          </div>
+    <div class="row">
+      <div class="col-12">
+        <nav class="main-nav">
+          <a href="{{ url('<front>') }}" class="logo">
+            <h1>Villa</h1>
+          </a>
+          {{ page.sticky_header }}
+          <a class='menu-trigger'>
+            <span>Menu</span>
+          </a>
+        </nav>
       </div>
+    </div>
   </div>
 </header>
 
 {{ page.main_banner }}
 
 <div class="featured section">
-{{page.featured_section}}
+  {{ page.featured_section }}
 </div>
 
 <div class="video section">
-    <div class="container">
-       <div class="row">
-       <div class="col-lg-4 offset-lg-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 offset-lg-4">
         {{ page.video_section }}
-       </div>
-
-       </div>
-
-       </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="video-content">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-10 offset-lg-1">
-          {{page.video_content}}
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1">
+        {{ page.video_content }}
       </div>
     </div>
   </div>
-
+</div>
 
 <div class="fun-facts">
-    <div class="container">
-      <div class="row">
-      {{page.fun_facts}}
-      </div>
+  <div class="container">
+    <div class="row">
+      {{ page.fun_facts }}
     </div>
   </div>
-
+</div>
 
 {{ page.content }}

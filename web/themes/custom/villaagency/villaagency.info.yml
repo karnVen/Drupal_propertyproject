@@ -8,7 +8,7 @@ libraries:
   - villaagency/global-styling
 regions:
   sub_header: 'Sub Header'
-  header_sticky: 'Sticky Header'
+  sticky_header: 'Sticky Header'
   main_banner: 'Main Banner'
   featured_section: 'Featured Section'
   video_section: 'Video Section'
