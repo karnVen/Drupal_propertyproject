@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * Implements hook_preprocess_views_style_best_deal().
+ */
+function villa_custom_preprocess_views_style_best_deal(&$variables) {
+  $view = $variables['view'];
+  $rows = $variables['rows'];
+
+  $i = 0;
+  foreach ($rows as $id => $row) {
+    // 1. Get the Entity (Node)
+    $entity = $row['#row']->_entity;
+    
+    // 2. Extract Data Fields safely using get('field_name')->getValue()
+    $total_flat_space = $entity->get('field_total_flat_space')->getValue();
+    $floor_number = $entity->get('field_floor_number')->getValue();
+    $number_of_rooms = $entity->get('field_number_of_rooms')->getValue();
+    $parking_available = $entity->get('field_parking_available')->getValue();
+    $payment_process = $entity->get('field_payment_process')->getValue();
+    
+    // 3. Extract Image Path
+    $image_path = '';
+    if (!$entity->get('field_deal_image')->isEmpty()) {
+       $file_entity = $entity->get('field_deal_image')->entity;
+       if ($file_entity) {
+          $image_uri = $file_entity->getFileUri();
+          $image_path = \Drupal::service('file_url_generator')->generateAbsoluteString($image_uri);
+       }
+    }
+
+    // 4. Pass everything to the Twig template variables
+    $variables['rows'][$id]['total_flat_space'] = isset($total_flat_space[0]['value']) ? $total_flat_space[0]['value'] : '';
+    $variables['rows'][$id]['floor_number'] = isset($floor_number[0]['value']) ? $floor_number[0]['value'] : '';
+    $variables['rows'][$id]['number_of_rooms'] = isset($number_of_rooms[0]['value']) ? $number_of_rooms[0]['value'] : '';
+    $variables['rows'][$id]['parking_available'] = isset($parking_available[0]['value']) ? $parking_available[0]['value'] : '';
+    $variables['rows'][$id]['payment_process'] = isset($payment_process[0]['value']) ? $payment_process[0]['value'] : '';
+    $variables['rows'][$id]['image_path'] = $image_path;
+    
+    // 5. Create an active class index so the first tab is always open by default
+    $variables['rows'][$id]['active_class'] = ($i == 0) ? 'active' : '';
+    $variables['rows'][$id]['show_class'] = ($i == 0) ? 'show active' : '';
+    $variables['rows'][$id]['tab_index'] = $i;
+
+    $i++;
+  }
+}
